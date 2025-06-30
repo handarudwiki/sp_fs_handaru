@@ -1,10 +1,10 @@
-export default class ConflictException extends Error {
+export default class ForbiddenException extends Error {
     statusCode: number;
     message: string;
 
     constructor(message: string) {
         super(message);
-        this.statusCode = 409;
+        this.statusCode = 403;
         this.message = message;
     }
 }
