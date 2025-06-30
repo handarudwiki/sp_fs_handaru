@@ -1,7 +1,9 @@
-import express, { ErrorRequestHandler } from "express";
+import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import dotenv from "dotenv";
+import { errorMiddleware } from "./middlewares/error.middleware";
+import userRoute from "./routes/user.route";
 
 
 
@@ -15,6 +17,8 @@ app.use(cors());
 app.use(helmet());
 
 const prefixRoute = `api/${process.env.API_VERSION || "v1"}`;
+
+app.use(`/${prefixRoute}/users`, userRoute);
 
 
 app.use(errorMiddleware)
