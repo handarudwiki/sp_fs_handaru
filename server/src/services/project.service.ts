@@ -78,14 +78,14 @@ export default class ProjectService {
 
     const where: Prisma.ProjectWhereInput = {
       OR: [
-        {
-          ownerId: user_id,
-          memberships: {
+        
+          {ownerId: user_id},
+          {memberships: {
             some: {
               userId: user_id,
             },
           },
-        },
+          }
       ],
     };
 
@@ -95,6 +95,7 @@ export default class ProjectService {
         mode: "insensitive",
       };
     }
+
 
     const projects = await prisma.project.findMany({
       where,
