@@ -13,6 +13,7 @@ import ProjectValidation, {
 import Validation from "../validations/validate";
 import formatPagination from "../helpers/format_pagination";
 import { defaultLimit, defaultPage  } from "../consts/pagination";
+import NotFoundException from "../errors/not_found.exception";
 
 
 export default class ProjectService {
@@ -150,7 +151,7 @@ export default class ProjectService {
     });
 
     if (!isProjectExist) {
-      throw new Error("Project not found");
+      throw new NotFoundException("Project not found");
     }
 
     if (isProjectExist.ownerId !== owner_id) {
