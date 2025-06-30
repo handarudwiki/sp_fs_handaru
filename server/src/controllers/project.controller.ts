@@ -2,14 +2,16 @@ import { string } from 'zod';
 import { NextFunction, Request, Response } from "express";
 import ProjectService from "../services/project.service";
 import successResponse from "../helpers/success_response";
-import { ProjectDelete, ProjectFilter, ProjectInviteMember, ProjectKickMember } from "../validations/project.validation";
+import { ProjectCreate, ProjectDelete, ProjectFilter, ProjectInviteMember, ProjectKickMember } from "../validations/project.validation";
 
 export default class ProjectController {
     static async create(req:Request, res:Response, next:NextFunction) {
         try {
-            // Logic to create a project
-            const data = req.body;
-            data.owner_id = req.user?.id; // Assuming req.user is set by auth middleware
+            
+            const data:ProjectCreate = {
+                ...req.body,
+                owner_id: req.user?.id // Assuming req.user is set by auth middleware
+            }
             const project = await ProjectService.create(data);
             successResponse(res, project, "Project created successfully");
         } catch (error) {
