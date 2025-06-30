@@ -216,6 +216,15 @@ export default class ProjectService {
                 id: true,
                 name: true,
                 ownerId: true,
+                tasks: {
+                    select: {
+                        id: true,
+                        title: true,
+                        description: true,
+                        status: true,
+                        assignedId: true,
+                    }
+                },
                 memberships: {
                     select: {
                         userId: true,
