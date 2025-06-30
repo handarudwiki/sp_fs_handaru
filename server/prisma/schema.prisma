@@ -23,6 +23,7 @@ model User {
 
   projects Project[] @relation("UserProjects")
   memberships Membership[]
+  tasksAssigned Task[] @relation("UserTasksAssigned")
  
   @@map("users")
 }
@@ -37,6 +38,7 @@ model Project {
   owner User @relation("UserProjects",fields: [ownerId], references: [id])
   memberships Membership[]
   tasks Task[]
+  
 
   @@map("projects")
 }
@@ -62,8 +64,10 @@ model Task {
   projectId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  assignedId String
 
   project Project @relation(fields: [projectId], references: [id])
+  assigned User @relation("UserTasksAssigned",fields: [assignedId], references: [id])
 
   @@map("tasks")
 }

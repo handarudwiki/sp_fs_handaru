@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import { errorMiddleware } from "./middlewares/error.middleware";
 import userRoute from "./routes/user.route";
 import projectRoute from "./routes/project.route";
-
+import taskRoute from "./routes/task.route";
 
 
 dotenv.config();
@@ -21,6 +21,8 @@ const prefixRoute = `api/${process.env.API_VERSION || "v1"}`;
 
 app.use(`/${prefixRoute}/users`, userRoute);
 app.use(`/${prefixRoute}/projects`, projectRoute);
+app.use(`/${prefixRoute}/tasks`, taskRoute);
+
 
 
 app.use(errorMiddleware)
