@@ -23,7 +23,8 @@ export default class ProjectController {
         try {
             // Logic to update a project
             const data = req.body;
-            data.owner_id = req.user?.id; // Assuming req.user is set by auth middleware
+            data.owner_id = req.user?.id;
+            data.id = req.params.id; // Assuming project ID is passed as a URL parameter
             const project = await ProjectService.update(data);
             successResponse(res, project, "Project updated successfully");
         } catch (error) {
