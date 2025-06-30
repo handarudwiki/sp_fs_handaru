@@ -65,7 +65,7 @@ export default class ProjectController {
             const data:ProjectInviteMember = {
                 project_id: req.params.id,
                 user_ids: req.body.user_ids,
-                owner_id: req.body.user.id // Assuming req.user is set by auth middleware
+                owner_id: req.user?.id! // Assuming req.user is set by auth middleware
             } // Assuming req.user is set by auth middleware
             
             const result = await ProjectService.invitMember(data);
