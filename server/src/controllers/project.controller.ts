@@ -79,7 +79,7 @@ export default class ProjectController {
         try {
            const data:ProjectKickMember = {
                 project_id: req.params.id, // Assuming project ID is passed as a URL parameter
-                user_ids: req.body.user_ids, // Assuming user ID to kick is passed in the request body
+                user_id: req.body.user_id, // Assuming user ID to kick is passed in the request body
                 owner_id: req.user?.id! // Assuming req.user is set by auth middleware
             } // Assuming req.user is set by auth middleware
             const result = await ProjectService.kickMember(data);

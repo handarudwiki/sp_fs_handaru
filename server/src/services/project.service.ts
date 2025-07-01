@@ -106,6 +106,17 @@ export default class ProjectService {
         id: true,
         name: true,
         ownerId: true,
+        memberships: {
+          select: {
+            userId: true,
+            user: {
+              select: {
+                id: true,
+                email: true,  
+              },
+            },
+          },
+        },
       },
     });
 
@@ -175,7 +186,7 @@ export default class ProjectService {
     static async kickMember(dto: ProjectKickMember) {
         const validData = Validation.validate(ProjectValidation.KICK_MEMBER, dto);
     
-        const { project_id, user_ids, owner_id } = validData;
+        const { project_id, user_id, owner_id } = validData;
     
         const isProjectExist = await prisma.project.findUnique({
         where: { id: project_id },
@@ -194,9 +205,7 @@ export default class ProjectService {
         const membership = await prisma.membership.deleteMany({
         where: {
             projectId: project_id,
-            userId: {
-                in: user_ids,
-            },
+            userId: user_id,
         },
         });
     

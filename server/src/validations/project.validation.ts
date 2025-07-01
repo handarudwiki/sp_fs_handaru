@@ -37,7 +37,7 @@ export default class ProjectValidation {
     static KICK_MEMBER = z.object({
         owner_id: z.string().uuid({ message: "Invalid owner ID format" }),
         project_id: z.string().uuid({ message: "Invalid project ID format" }),
-        user_ids: z.array(z.string().uuid({ message: "Invalid user ID format" })).nonempty({ message: "At least one user ID is required" }),
+        user_id: z.string().uuid({ message: "Invalid user ID format" })
     })
 }
 
