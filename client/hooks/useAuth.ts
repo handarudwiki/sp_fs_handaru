@@ -22,7 +22,9 @@ export const useLogin = () => {
       return response.data;
     },
     onSuccess: (data) => {
-      setAuth(data.user, data.token);
+      console.log("== Login Success ================");
+      console.log('Login successful:', data);
+      setAuth( data.data.token);
     },
   });
 };
