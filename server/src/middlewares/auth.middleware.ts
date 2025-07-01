@@ -1,7 +1,5 @@
 import {NextFunction, Request, Response} from 'express';
-import { string } from 'zod';
 import { verifyToken } from '../helpers/jwt';
-import ForbiddenException from '../errors/forbidden.exception';
 import UnauthorizedException from '../errors/unauthorized.exception';
 
 declare global {
