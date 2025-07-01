@@ -10,5 +10,6 @@ router.post('/', TaskController.create);
 router.put('/:id', TaskController.update);
 router.delete('/:id', TaskController.delete);
 router.get('/:projectId', TaskController.findAll);
+router.get('/:projectId/analytics', TaskController.analytics);
 
 export default router;

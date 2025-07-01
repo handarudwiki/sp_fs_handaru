@@ -65,5 +65,16 @@ export default class TaskController {
         }
     }
 
+    static async analytics(req: Request, res: Response, next: NextFunction) {
+        try {
+            const taskId = req.params.projectId; // Assuming task ID is passed as a URL parameter
 
+            const result = await TaskService.analytics(taskId);
+            
+            // Send success response
+            successResponse(res, result, "Task retrieved successfully");
+        } catch (error) {
+            next(error);
+        }
+    }
 }
