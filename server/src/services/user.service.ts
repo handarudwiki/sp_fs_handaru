@@ -8,6 +8,22 @@ import { hash, compare } from 'bcryptjs';
 
 export default class UserService{
 
+    static async findAll (userId :string){ {
+        const users = await prisma.user.findMany({
+            select: {
+                id: true,
+                email: true,
+            },
+            where: {
+                NOT: {
+                    id: userId,
+                }
+            },
+        });
+        return users;
+    }
+ }
+
     static async register (dto: UserLogin){
 
         const validData = Validation.validate(UserValidation.LOGIN, dto);

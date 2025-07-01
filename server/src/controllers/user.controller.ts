@@ -22,4 +22,14 @@ export default class UserController {
             next(error);
         }
     }
+
+    static async findAll(req:Request, res:Response, next:NextFunction) {
+        try {
+            const result = await UserService.findAll(req.user?.id!);
+            
+             successResponse(res, result, "Users fetched successfully");
+        } catch (error) {
+            next(error);
+        }
+    }
 }

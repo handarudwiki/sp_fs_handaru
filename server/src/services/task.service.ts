@@ -122,7 +122,14 @@ export default class TaskService {
                 projectId: true,
                 assignedId: true,
                 status: true,
+                assigned: {
+                    select: {
+                        id: true,
+                        email: true,
+                    }   
             },
+        }
+            
         });
 
         return {
