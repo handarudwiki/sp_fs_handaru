@@ -225,6 +225,12 @@ export default class ProjectService {
                         assignedId: true,
                     }
                 },
+                owner:{
+                    select: {
+                        id: true,
+                        email: true,
+                    },
+                },
                 memberships: {
                     select: {
                         userId: true,
