@@ -12,7 +12,6 @@ import { toast } from 'sonner';
 
 const projectSchema = z.object({
   name: z.string().min(2, 'Project name must be at least 2 characters'),
-  description: z.string().optional(),
 });
 
 interface CreateProjectFormProps {
@@ -26,7 +25,6 @@ export default function CreateProjectForm({ onSuccess }: CreateProjectFormProps)
     resolver: zodResolver(projectSchema),
     defaultValues: {
       name: '',
-      description: '',
     },
   });
 
@@ -52,22 +50,6 @@ export default function CreateProjectForm({ onSuccess }: CreateProjectFormProps)
               <FormLabel>Project Name</FormLabel>
               <FormControl>
                 <Input placeholder="Enter project name" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Description (Optional)</FormLabel>
-              <FormControl>
-                <Textarea 
-                  placeholder="Enter project description" 
-                  {...field} 
-                />
               </FormControl>
               <FormMessage />
             </FormItem>

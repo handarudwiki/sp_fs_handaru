@@ -22,8 +22,6 @@ export const useLogin = () => {
       return response.data;
     },
     onSuccess: (data) => {
-      console.log("== Login Success ================");
-      console.log('Login successful:', data);
       setAuth( data.data.token);
     },
   });
