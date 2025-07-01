@@ -8,7 +8,7 @@ import { hash, compare } from 'bcryptjs';
 
 export default class UserService{
 
-    static async findAll (userId :string){ {
+    static async search (userId :string, search: string){ {
         const users = await prisma.user.findMany({
             select: {
                 id: true,
@@ -17,7 +17,11 @@ export default class UserService{
             where: {
                 NOT: {
                     id: userId,
-                }
+                },
+                email: {
+                    contains: search,
+                    mode: 'insensitive', // Case-insensitive search
+                },
             },
         });
         return users;

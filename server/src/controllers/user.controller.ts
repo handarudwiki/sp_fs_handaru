@@ -25,7 +25,7 @@ export default class UserController {
 
     static async findAll(req:Request, res:Response, next:NextFunction) {
         try {
-            const result = await UserService.findAll(req.user?.id!);
+            const result = await UserService.search(req.user?.id!, req.query.q as string);
             
              successResponse(res, result, "Users fetched successfully");
         } catch (error) {

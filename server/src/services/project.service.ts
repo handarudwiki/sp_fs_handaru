@@ -144,7 +144,7 @@ export default class ProjectService {
   static async invitMember(dto:ProjectInviteMember){
     const validData = Validation.validate(ProjectValidation.INVIT_MEMBER, dto);
 
-    const { project_id, user_ids, owner_id } = validData;
+    const { project_id, user_id, owner_id } = validData;
 
     const isProjectExist = await prisma.project.findUnique({
       where: { id: project_id },
@@ -159,19 +159,17 @@ export default class ProjectService {
         "You are not authorized to invite members to this project"
       );
     }
-
-    const memberships = await prisma.membership.createMany({
-      data: user_ids.map((userId) => ({
+     await prisma.membership.create({
+      data: {
         projectId: project_id,
-        userId,
-      })),
-      skipDuplicates: true, 
-    });
-
-    return {
-      message: "Members invited successfully",
-      count: memberships.count,
-    };
+        userId: user_id,
+      },
+      select: {
+        id: true,
+        projectId: true,
+        userId: true,
+      },
+    })
   }
 
     static async kickMember(dto: ProjectKickMember) {
