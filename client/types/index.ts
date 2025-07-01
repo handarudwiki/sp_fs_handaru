@@ -10,7 +10,7 @@ export interface Project {
   description?: string;
   ownerId: string;
   owner: User;
-  members: User[];
+  memberships: User[];
   createdAt: string;
   updatedAt: string;
 }

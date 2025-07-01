@@ -17,7 +17,6 @@ export const useTasks = (params: TasksParams) => {
       const response = await api.get(`/tasks/${params.projectId}`, { 
         params: { ...params, projectId: undefined } 
       });
-      console.log("Tasks Response:", response.data);
       return response.data.data as PaginatedResponse<Task>;
     },
     enabled: !!params.projectId,
@@ -30,7 +29,8 @@ export const useTaskAnalytics = (projectId: string) => {
     queryKey: ['tasks', 'analytics', projectId],
     queryFn: async () => {
       const response = await api.get(`/tasks/${projectId}/analytics`);
-      return response.data as TaskAnalytics;
+  
+      return response.data.data as TaskAnalytics;
     },
     enabled: !!projectId,
   });

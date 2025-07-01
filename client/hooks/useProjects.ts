@@ -23,7 +23,7 @@ export const useProject = (id: string) => {
     queryKey: ['projects', id],
     queryFn: async () => {
       const response = await api.get(`/projects/${id}`);
-      return response.data as Project;
+      return response.data.data as Project;
     },
     enabled: !!id,
   });
@@ -47,8 +47,9 @@ export const useInviteMember = () => {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: async ({ projectId, email }: { projectId: string; email: string }) => {
-      const response = await api.post(`/projects/${projectId}/invite`, { email });
+    mutationFn: async ({ projectId, user_id }: { projectId: string; user_id: string }) => {
+      console.log("Inviting user:", user_id, "to project:", projectId);
+      const response = await api.post(`/projects/${projectId}/invite`, { user_id });
       return response.data;
     },
     onSuccess: (_, variables) => {
@@ -60,8 +61,8 @@ export const useInviteMember = () => {
 export const useExportProject = () => {
   return useMutation({
     mutationFn: async (projectId: string) => {
-      const response = await api.get(`/projects/${projectId}/export`);
-      return response.data;
+      const response = await api.get(`/projects/${projectId}`);
+      return response.data.data;
     },
   });
 };

@@ -29,6 +29,8 @@ export default function ProjectsGrid() {
   const projects = projectsData?.data || [];
   const pagination = projectsData?.pagination;
 
+  console.log("Projects DITI:", projects);
+
   const handleProjectClick = (project: Project) => {
     router.push(`/projects/${project.id}`);
   };
@@ -82,7 +84,7 @@ export default function ProjectsGrid() {
               <div className="flex items-center justify-between text-sm text-muted-foreground">
                 <div className="flex items-center">
                   <Users className="mr-1 h-3 w-3" />
-                  {project.members?.length || 0} members
+                  {project.memberships?.length || 0} members
                 </div>
                 <div className="flex items-center">
                   <Calendar className="mr-1 h-3 w-3" />

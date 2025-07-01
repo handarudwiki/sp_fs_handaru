@@ -13,7 +13,10 @@ const COLORS = {
 };
 
 export default function TaskAnalyticsChart({ projectId }: TaskAnalyticsChartProps) {
+  console.log("Project ID:", projectId);
+
   const { data: analytics, isLoading } = useTaskAnalytics(projectId);
+
 
   if (isLoading) {
     return <div>Loading analytics...</div>;
@@ -28,6 +31,8 @@ export default function TaskAnalyticsChart({ projectId }: TaskAnalyticsChartProp
     { name: 'In Progress', value: analytics.inProgress, fill: COLORS.IN_PROGRESS },
     { name: 'Done', value: analytics.done, fill: COLORS.DONE },
   ];
+
+  console.log("Bar Data:", barData);
 
   const pieData = barData.filter(item => item.value > 0);
 

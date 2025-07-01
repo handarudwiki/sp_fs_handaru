@@ -12,7 +12,6 @@ interface RegisterData {
   password: string;
 }
 
-
 export const useLogin = () => {
   const setAuth = useAuthStore((state) => state.setAuth);
   
@@ -38,10 +37,12 @@ export const useRegister = () => {
 
 export const useSearchUsers = (query: string) => {
   return useQuery({
-    queryKey: ['users', query],
+    queryKey: ['users', 'search', query],
     queryFn: async () => {
       if (!query) return [];
-      const response = await api.get(`/users`);
+      const response = await api.get(`/users/search?q=${query}`);
+      console.log("Search query:", query);
+      console.log("Search response:", response.data.data);
       return response.data.data;
     },
     enabled: !!query,
