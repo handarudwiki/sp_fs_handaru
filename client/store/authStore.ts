@@ -4,8 +4,10 @@ import { persist } from 'zustand/middleware';
 interface AuthState {
   token: string | null;
   isAuthenticated: boolean;
-  setAuth: ( token: string) => void;
+  setAuth: (token: string) => void;
   logout: () => void;
+  hasHydrated: boolean;
+  setHasHydrated: (value: boolean) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -13,17 +15,21 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       token: null,
       isAuthenticated: false,
+      hasHydrated: false,
+      setHasHydrated: (value) => set({ hasHydrated: value }),
       setAuth: (token) => {
-        localStorage.setItem('token', token);
-        set({  token, isAuthenticated: true });
+        set({ token, isAuthenticated: true });
       },
       logout: () => {
-        localStorage.removeItem('token');
-        set({  token: null, isAuthenticated: false });
+        set({ token: null, isAuthenticated: false });
       },
     }),
     {
       name: 'auth-storage',
+      skipHydration: false,
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true); // setelah persist selesai load
+      },
     }
   )
 );

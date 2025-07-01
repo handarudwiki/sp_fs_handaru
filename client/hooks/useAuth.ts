@@ -38,11 +38,11 @@ export const useRegister = () => {
 
 export const useSearchUsers = (query: string) => {
   return useQuery({
-    queryKey: ['users', 'search', query],
+    queryKey: ['users', query],
     queryFn: async () => {
       if (!query) return [];
-      const response = await api.get(`/users/search?q=${query}`);
-      return response.data;
+      const response = await api.get(`/users`);
+      return response.data.data;
     },
     enabled: !!query,
   });

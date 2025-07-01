@@ -1,7 +1,6 @@
 export interface User {
   id: string;
   email: string;
-  name: string;
   createdAt: string;
 }
 
@@ -23,7 +22,7 @@ export interface Task {
   status: 'TODO' | 'IN_PROGRESS' | 'DONE';
   projectId: string;
   assigneeId?: string;
-  assignee?: User;
+  assigned?: User;
   createdAt: string;
   updatedAt: string;
 }
