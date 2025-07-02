@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import api from '@/lib/api';
-import { Project, PaginatedResponse } from '@/types';
+import { Project, PaginatedResponse, ProjectMember } from '@/types';
 
 interface ProjectsParams {
   page?: number;
@@ -64,5 +64,16 @@ export const useExportProject = () => {
       const response = await api.get(`/projects/${projectId}`);
       return response.data.data;
     },
+  });
+};
+
+export const useMembers  = (projectId: string) => {
+  return useQuery({
+    queryKey: ['project-members', projectId],
+    queryFn: async () => {
+      const response = await api.get(`/projects/${projectId}/members`);
+      return response.data.data as ProjectMember[];
+    },
+    enabled: !!projectId,
   });
 };

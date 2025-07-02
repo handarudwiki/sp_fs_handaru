@@ -100,5 +100,16 @@ export default class ProjectController {
         }
     }
 
+    static async getMembers(req:Request, res:Response, next:NextFunction) {
+        try {
+            const projectId = req.params.id; // Assuming project ID is passed as a URL parameter
+            const members = await ProjectService.getMembers(projectId);
+        
+            successResponse(res, members, "Project members retrieved successfully");
+        } catch (error) {
+            next(error);
+        }
+    }
+
 
 }

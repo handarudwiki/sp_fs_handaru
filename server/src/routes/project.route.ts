@@ -13,6 +13,7 @@ router.get('/', ProjectController.findAll);
 router.get('/:id', ProjectController.details); // Assuming this is to get a specific project, might need to adjust based on your needs
 router.post('/:id/invite', ProjectController.inviteMember);
 router.post('/:id/kick', ProjectController.kickMember);
+router.get('/:id/members', ProjectController.getMembers); // Assuming this is to get members of a specific project
 
 export default router;
 

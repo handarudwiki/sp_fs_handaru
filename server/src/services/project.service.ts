@@ -258,4 +258,29 @@ export default class ProjectService {
 
         return isProjectExist;
     }
+
+    static async getMembers(projectId: string) {
+        const isProjectExist = await prisma.project.findUnique({
+            where: { id: projectId },
+            select: {
+                memberships: {
+                    select: {
+                        userId: true,
+                        user: {
+                            select: {
+                                id: true,
+                                email: true,
+                            },
+                        },
+                    },
+                },
+            },
+        });
+
+        if (!isProjectExist) {
+            throw new Error("Project not found");
+        }
+
+        return isProjectExist.memberships;
+    }
 }

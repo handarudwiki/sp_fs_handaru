@@ -10,8 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useCreateTask } from '@/hooks/useTasks';
 import { toast } from 'sonner';
-import { useSearchUsers } from '@/hooks/useAuth';
-import { User } from '@/types';
+import { useMembers } from '@/hooks/useProjects';
 
 const taskSchema = z.object({
   title: z.string().min(2, 'Task title must be at least 2 characters'),
@@ -60,7 +59,7 @@ export default function CreateTaskForm({
     }
   };
   
-  const users =  useSearchUsers('all');
+  const members =  useMembers(projectId);
 
   return (
     <Form {...form}>
@@ -107,7 +106,7 @@ export default function CreateTaskForm({
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {users.data?.map((user:User) => (
+                  {members.data?.map(({user}) => (
                     <SelectItem key={user.id} value={user.id}>
                       {user.email}
                     </SelectItem>

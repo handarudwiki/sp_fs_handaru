@@ -42,3 +42,17 @@ export interface TaskAnalytics {
   inProgress: number;
   done: number;
 }
+
+
+export interface ProjectMember {
+  id: string;
+  user_id: string;
+  project_id: string;
+  role: string;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    // tambahkan field lain sesuai struktur user
+  };
+}
