@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import successResponse from "../helpers/success_response";
 import TaskService from "../services/task.service";
 import { TaskCreate, TaskDelete, TaskFilter } from "../validations/task.validation";
-import { TaskStatus } from "../generated/prisma";
+import { TaskStatus } from "@prisma/client";
 
 export default class TaskController {
     static async create(req: Request, res: Response, next: NextFunction) {

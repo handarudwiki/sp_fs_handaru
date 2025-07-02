@@ -8,7 +8,7 @@ import TaskValidation, {
 } from "../validations/task.validation";
 import Validation from "../validations/validate";
 import formatPagination from "../helpers/format_pagination";
-import { Prisma } from "../generated/prisma";
+import { Prisma } from "@prisma/client";
 
 export default class TaskService {
   static async create(dto: TaskCreate) {

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TaskStatus } from "../generated/prisma";
+import { TaskStatus } from "@prisma/client"; // Adjust the import based on your Prisma setup
 
 export default class TaskValidation {
     static CREATE = z.object({

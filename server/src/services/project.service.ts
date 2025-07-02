@@ -1,6 +1,6 @@
 import { format } from "path";
 import ForbiddenException from "../errors/forbidden.exception";
-import { Prisma } from "../generated/prisma";
+import { Prisma } from "@prisma/client"; // Adjust the import based on your Prisma setup
 import prisma from "../helpers/prisma";
 import ProjectValidation, {
   ProjectCreate,
